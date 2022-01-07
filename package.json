@@ -1,0 +1,8 @@
+{
+  "name": "catalog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Evgeny-Archi/catalog.git",
+  "author": "Evgeny",
+  "license": "MIT"
+}
