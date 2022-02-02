@@ -1,5 +1,5 @@
 import './style.css';
-import foo from './print';
+import foo from './main';
 
 function component() {
     const root = document.getElementById('root');
