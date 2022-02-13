@@ -5,20 +5,31 @@
   "repository": "https://github.com/Evgeny-Archi/catalog.git",
   "author": "Evgeny",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.3",
-    "style-loader": "^3.3.1",
+    "typescript": "^4.5.5",
     "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1",
+    "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3",
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
     "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
-    "build": "webpack",
-    "start": "webpack serve --open"
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack serve --open --config webpack.dev.js"
   }
 }
