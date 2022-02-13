@@ -4,12 +4,12 @@ import 'webpack-dev-server';
 import common from './webpack.common';
 
 const config: Configuration = merge(common, {
-    mode: 'development',
-    devtool: 'cheap-module-source-map',
-    devServer: {
-        static: './dist',
-        hot: true,
-    },
-})
+     mode: 'development',
+     devtool: 'cheap-module-source-map',
+     devServer: {
+          static: './dist',
+          hot: true,
+     },
+});
 
 export default config;

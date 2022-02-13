@@ -1,9 +1,4 @@
 {
-    "presets": [
-        // reversed order
-        "@babel/env",
-        "@babel/react",
-        "@babel/preset-typescript"
-    ],
-    "targets": "> 0.25%, not dead"
+     "presets": ["@babel/env", "@babel/react", "@babel/preset-typescript"],
+     "targets": "> 0.25%, not dead"
 }

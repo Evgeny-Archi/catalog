@@ -14,7 +14,7 @@ const config: Configuration = {
           }),
           new MiniCssExtractPlugin({
                filename: '[name].css',
-          })
+          }),
      ],
      output: {
           filename: '[name].[contenthash].js',
@@ -29,13 +29,13 @@ const config: Configuration = {
                     use: {
                          loader: 'babel-loader',
                          options: {
-                              presets: ['@babel/preset-react', '@babel/preset-typescript']
-                         }
-                    }
+                              presets: ['@babel/preset-react', '@babel/preset-typescript'],
+                         },
+                    },
                },
                {
                     test: /\.css$/i,
-                    use: [MiniCssExtractPlugin.loader, 'css-loader']
+                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
                },
                {
                     test: /\.(?:ico|png|jpg|jpeg|gif)$/i,
@@ -45,7 +45,7 @@ const config: Configuration = {
                     test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
                     type: 'asset/inline',
                },
-          ]
+          ],
      },
      resolve: {
           extensions: ['.tsx', '.ts', '.js'],
@@ -54,15 +54,15 @@ const config: Configuration = {
           moduleIds: 'deterministic',
           runtimeChunk: 'single',
           splitChunks: {
-              cacheGroups: {
-                vendor: {
-                  test: /[\\/]node_modules[\\/]/,
-                  name: 'vendors',
-                  chunks: 'all',
-                },
-              },
+               cacheGroups: {
+                    vendor: {
+                         test: /[\\/]node_modules[\\/]/,
+                         name: 'vendors',
+                         chunks: 'all',
+                    },
+               },
           },
-      },
-}
+     },
+};
 
 export default config;
