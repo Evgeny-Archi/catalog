@@ -1,8 +1,9 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import * as path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { Configuration } from 'webpack';
 
-module.exports = {
+const config: Configuration = {
      entry: {
           app: './src/index.tsx',
      },
@@ -62,4 +63,6 @@ module.exports = {
               },
           },
       },
-};
+}
+
+export default config;
