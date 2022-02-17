@@ -1,19 +1,27 @@
 {
      "compilerOptions": {
-          "outDir": "./dist/",
-          "sourceMap": true,
+          "alwaysStrict": true,
           "noImplicitAny": true,
-          "module": "ESNext",
-          "target": "es5",
+          "strictNullChecks": true,
+          "strictFunctionTypes": true,
+          "strictBindCallApply": true,
+          "outDir": "./build/",
+          "sourceMap": true,
+          "module": "CommonJS",
+          "target": "es6",
           "jsx": "react",
           "allowJs": true,
           "moduleResolution": "node",
           "allowSyntheticDefaultImports": true,
-          "esModuleInterop": true
+          "esModuleInterop": true,
+          "forceConsistentCasingInFileNames": true,
+          "declaration": true,
+          "lib": [
+               "DOM",
+               "DOM.iterable",
+               "ESNext"
+          ]
      },
-     "ts-node": {
-          "compilerOptions": {
-               "module": "CommonJS"
-          }
-     }
+     "include": ["src/**/*"],
+     "exclude": ["node_modules"]
 }

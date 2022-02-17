@@ -9,6 +9,7 @@ const config: Configuration = merge(common, {
      devServer: {
           static: './dist',
           hot: true,
+          open: true,
      },
 });
 
