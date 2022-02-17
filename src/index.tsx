@@ -13,6 +13,7 @@ const App: FC<Props> = ({ a }) => {
     return (
         <>
             <div>Hello world</div>
+            <div>asd</div>
             <Counter />
             <img src={logoUri} width="200" alt="alt" />
         </>
