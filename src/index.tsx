@@ -5,21 +5,18 @@ import Counter from './Counter';
 import './style.css';
 
 type Props = {
-  a: string;
+    a: string;
 };
 
 const App: FC<Props> = ({ a }) => {
-  console.log(a);
-  return (
-  <>
-<div>Hello world</div>
-      <Counter />
-      <img src={logoUri} width="200" alt="alt" />
-    </>
-  );
+    console.log(a);
+    return (
+        <>
+            <div>Hello world</div>
+            <Counter />
+            <img src={logoUri} width="200" alt="alt" />
+        </>
+    );
 };
 
-ReactDom.render(
-  <App a="string" />,
-  document.getElementById('root'),
-);
+ReactDom.render(<App a="string" />, document.getElementById('root'));
