@@ -7,6 +7,11 @@ const config: Configuration = {
     entry: {
         app: './src/index.tsx',
     },
+    output: {
+        filename: '[name].[contenthash].js',
+        path: path.resolve(__dirname, 'build'),
+        clean: true,
+    },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Catalog',
@@ -16,11 +21,6 @@ const config: Configuration = {
             filename: '[name].css',
         }),
     ],
-    output: {
-        filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, 'build'),
-        clean: true,
-    },
     module: {
         rules: [
             {
@@ -35,14 +35,41 @@ const config: Configuration = {
             },
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            esModule: false,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.svg$/,
+                oneOf: [
+                    {
+                        issuer: /\.[jt]sx?$/,
+                        resourceQuery: /component/,
+                        use: ['@svgr/webpack'],
+                    },
+                    {
+                        type: 'asset/resource',
+                        generator: {
+                            filename: 'media/[name].[contenthash][ext]',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(?:ico|png|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
+                generator: {
+                    filename: 'media/[name].[contenthash][ext]',
+                },
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/inline',
             },
         ],

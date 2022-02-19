@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import ReactDom from 'react-dom';
-import logoUri from './logo.svg';
+import { Logo } from './assets';
+import logoUrl from './assets/logo.svg';
 import Counter from './Counter';
 import './style.css';
 
@@ -8,14 +9,17 @@ type Props = {
     a: string;
 };
 
-const App: FC<Props> = ({ a }) => {
-    console.log(a);
+const App: FC<Props> = (props) => {
+    const b = props.a;
+    console.log(b);
     return (
         <>
             <div>Hello world</div>
             <div>asd</div>
             <Counter />
-            <img src={logoUri} width="200" alt="alt" />
+            <div style={{ width: '200px', height: '200px', background: `url(${logoUrl})` }}></div>
+            <img src={logoUrl} width="200" alt="alt" />
+            <Logo />
         </>
     );
 };
