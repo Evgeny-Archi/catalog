@@ -6,6 +6,7 @@ import { Configuration } from 'webpack';
 const config: Configuration = {
     entry: {
         app: './src/index.tsx',
+        server: './server/server.ts',
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -76,6 +77,10 @@ const config: Configuration = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        fallback: {
+            http: false,
+            url: false,
+        },
     },
     optimization: {
         moduleIds: 'deterministic',

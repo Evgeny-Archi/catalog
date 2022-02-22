@@ -22,6 +22,6 @@
                "ESNext"
           ]
      },
-     "include": ["src/**/*"],
-     "exclude": ["node_modules"]
+     "include": ["src/**/*", "server/**/*"],
+     "exclude": ["node_modules", "build"]
 }
