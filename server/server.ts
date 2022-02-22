@@ -25,5 +25,4 @@ const server = http.createServer(
 server.listen(port, hostname, () => {
     console.log(addtwo(2));
     console.log(`Server running at http://${hostname}:${port}/`);
-    console.log(global);
 });
