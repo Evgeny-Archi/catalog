@@ -1,28 +1,23 @@
-const http = require('http');
-const { addtwo } = require('./addtwo');
+import http, { Server } from 'http';
 
-const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer(
-    (
-        req: { url: string },
-        res: { statusCode: number; setHeader: (arg0: string, arg1: string) => void; end: (arg0: string) => void }
-    ) => {
-        const { name } = require('url').parse(req.url, true).query;
+const server: Server = http.createServer();
 
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
+server.on('request', (req, res) => {
+    console.log('Request event');
 
-        if (name !== undefined) {
-            res.end(`Hello ${name}`);
-        } else {
-            res.end(`Hello world`);
-        }
-    }
-);
-
-server.listen(port, hostname, () => {
-    console.log(addtwo(2));
-    console.log(`Server running at http://${hostname}:${port}/`);
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello');
 });
+
+server.on('connection', () => {
+    console.log('Connection event');
+});
+
+server.listen(port, () => {
+    console.log('Listening event', process.env.USER_ID);
+    console.log(process.argv);
+});
+
+console.log('Server start at port:', port);
