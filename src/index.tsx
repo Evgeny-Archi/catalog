@@ -5,13 +5,26 @@ import logoUrl from './assets/logo.svg';
 import Counter from './Counter';
 import './style.css';
 
-type Props = {
-    a: string;
+interface Circle {
+    width: number;
+}
+
+interface Rectangle extends Circle {
+    height: number;
+}
+
+type Shape = Circle | Rectangle;
+
+const isRectangle = (shape: Shape): shape is Rectangle => {
+    if ('height' in shape) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
-const App: FC<Props> = (props) => {
-    const b = props.a;
-    console.log(b);
+const App: FC<{ shape: Shape }> = ({ shape }) => {
+    console.log(isRectangle(shape));
     return (
         <>
             <div>Hello world</div>
@@ -24,4 +37,4 @@ const App: FC<Props> = (props) => {
     );
 };
 
-ReactDom.render(<App a="string" />, document.getElementById('root'));
+ReactDom.render(<App shape={{ width: 100 }} />, document.getElementById('root'));
