@@ -17,7 +17,6 @@ server.on('connection', () => {
 
 server.listen(port, () => {
     console.log('Listening event', process.env.USER_ID);
-    console.log(process.argv);
 });
 
 console.log('Server start at port:', port);

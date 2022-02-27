@@ -28,7 +28,6 @@ const App: FC<{ shape: Shape }> = ({ shape }) => {
     return (
         <>
             <div>Hello world</div>
-            <div>asd</div>
             <Counter />
             <div style={{ width: '200px', height: '200px', background: `url(${logoUrl})` }}></div>
             <img src={logoUrl} width="200" alt="alt" />
