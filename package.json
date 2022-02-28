@@ -61,7 +61,7 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
     "prettify": "prettier --config .prettierrc --write",
-    "server": "ts-node ./server/server.ts",
+    "server": "ts-node ./src/server/server.ts",
     "pre-commit": "lint-staged"
   },
   "pre-commit": "pre-commit"
