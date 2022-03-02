@@ -64,5 +64,10 @@
     "server": "ts-node ./src/server/server.ts",
     "pre-commit": "lint-staged"
   },
-  "pre-commit": "pre-commit"
+  "pre-commit": "pre-commit",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
