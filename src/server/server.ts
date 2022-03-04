@@ -1,73 +1,42 @@
 import http, { Server, IncomingMessage, ServerResponse } from 'http';
-import { URL } from 'url';
+import fs from 'fs';
+import path from 'path';
+import mime from 'mime';
 
-interface Params {
-    req: IncomingMessage;
-    res: ServerResponse;
-    method?: string;
-}
-
-const requestHandler = ({ req, res, method = 'GET' }: Params, response: string) => {
-    if (method === 'POST') {
-        let body = '';
-
-        req.on('data', (data) => {
-            body += data;
-        });
-
-        req.on('end', () => {
-            const post = JSON.parse(body);
-            console.log(post);
-
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
-            res.end(response);
-        });
-    } else {
-        req.on('end', () => {
-            res.end('Hello from GET request');
-        });
-    }
-};
-
-const port = 3000;
-
-const server: Server = http.createServer();
-
-server.on('request', (req: IncomingMessage, res: ServerResponse) => {
+const server: Server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
     if (req.url) {
-        const url: URL = new URL(req.url, `http://${req.headers.host}`);
+        const pathname = path.normalize(path.resolve(__dirname + '/..//client/' + req.url));
 
-        if (url.pathname === '/hello') {
-            requestHandler(
-                {
-                    req,
-                    res,
-                    method: req.method,
-                },
-                'Hello from server! /hello'
-            );
-        } else if (url.pathname === '/test') {
-            requestHandler(
-                {
-                    req,
-                    res,
-                    method: req.method,
-                },
-                'Hello from server! /test'
-            );
-        } else {
-            requestHandler(
-                {
-                    req,
-                    res,
-                    method: req.method,
-                },
-                'Hello from server!'
-            );
-        }
+        fs.stat(pathname, (err, stats) => {
+            if (err) {
+                res.writeHead(404);
+                res.write('Resource missing 404\n');
+                res.end();
+            } else if (stats.isFile()) {
+                const type = mime.lookup(pathname);
+                res.setHeader('Content-Type', type);
+                // Создание и перенаправление потока для чтения
+                const file = fs.createReadStream(pathname);
+                file.on('open', () => {
+                    // Код 200 - файл найден, ошибок нет
+                    res.statusCode = 200;
+                    file.pipe(res);
+                });
+                file.on('error', (err) => {
+                    console.log(err);
+                    res.statusCode = 403;
+                    res.write('file permission');
+                    res.end();
+                });
+            } else {
+                res.writeHead(403);
+                res.write('Directory access is forbidden');
+                res.end();
+            }
+        });
     }
 });
 
-server.listen(port, () => {
-    console.log('Server start at port:', port);
-});
+server.listen(3000);
+
+console.log('Server listen port 3000');

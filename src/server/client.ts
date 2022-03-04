@@ -8,7 +8,7 @@ const options: RequestOptions = {
     hostname: 'localhost',
     port: 3000,
     method: 'POST',
-    path: '/test',
+    path: '/src/client/index.html',
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': postData.length,
