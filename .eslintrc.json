@@ -72,5 +72,5 @@
             "enforceForRenamedProperties": false
         }]
     },
-    "ignorePatterns": ["build", "node_modules"]
+    "ignorePatterns": ["frontend/build", "node_modules"]
 }

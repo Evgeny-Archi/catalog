@@ -16,7 +16,6 @@ const options: RequestOptions = {
 };
 
 const req: ClientRequest = http.request(options, (res) => {
-    console.log('Status: ', res.statusCode);
     console.log('Headers: ', JSON.stringify(res.headers));
     res.setEncoding('utf-8');
 

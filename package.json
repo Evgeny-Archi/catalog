@@ -6,6 +6,7 @@
   "author": "Evgeny",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -55,13 +56,13 @@
   },
   "scripts": {
     "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
-    "build": "webpack --config webpack.prod.ts",
-    "start": "webpack serve --config webpack.dev.ts",
+    "build": "webpack --config ./frontend/config/webpack.prod.ts",
+    "start": "webpack serve --config ./frontend/config/webpack.dev.ts",
     "stylelint:all": "yarn stylelint",
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
     "prettify": "prettier --config .prettierrc --write",
-    "server": "ts-node ./src/server/server.ts",
+    "server": "ts-node ./server/server.ts",
     "pre-commit": "lint-staged"
   },
   "pre-commit": "pre-commit",
