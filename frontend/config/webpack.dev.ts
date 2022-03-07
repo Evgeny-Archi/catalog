@@ -14,6 +14,9 @@ const config: Configuration = merge(common, {
         hot: true,
         open: true,
         compress: true,
+        proxy: {
+            '/api': 'http://localhost:3000',
+        },
     },
 });
 

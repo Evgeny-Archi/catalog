@@ -1,30 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { Logo } from './assets';
 import logoUrl from './assets/logo.svg';
 import Counter from './Counter';
 import './style.css';
 
-interface Circle {
-    width: number;
-}
+const App: FC = () => {
+    useEffect(() => {
+        fetch('/api').then((res) => console.log(res));
+    }, []);
 
-interface Rectangle extends Circle {
-    height: number;
-}
-
-type Shape = Circle | Rectangle;
-
-const isRectangle = (shape: Shape): shape is Rectangle => {
-    if ('height' in shape) {
-        return true;
-    } else {
-        return false;
-    }
-};
-
-const App: FC<{ shape: Shape }> = ({ shape }) => {
-    console.log(isRectangle(shape));
     return (
         <>
             <div>Hello world</div>
@@ -36,4 +21,4 @@ const App: FC<{ shape: Shape }> = ({ shape }) => {
     );
 };
 
-ReactDom.render(<App shape={{ width: 100 }} />, document.getElementById('root'));
+ReactDom.render(<App />, document.getElementById('root'));
