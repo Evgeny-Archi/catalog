@@ -1,33 +1,40 @@
 const express = require('express');
-require('dotenv').config();
+const bodyParser = require('body-parser');
+const multiparty = require('multiparty');
+const handlers = require('./lib/handlers');
+const logger = require('./middleware/logger');
+
 const app = express();
 
-const port = process.env.PORT || 3000;
+app.use(bodyParser.json());
+app.use(logger(app.get('env')));
 
-const options = {
-    extensions: ['htm', 'html'],
-};
-app.use(express.static(__dirname + '/static', options));
-
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/api', handlers.home);
+app.post('/api/process', handlers.process);
+app.post('/api/files', (req, res) => {
+    const form = new multiparty.Form();
+    form.parse(req, (err, fields, files) => {
+        if (err) return res.status(500).send({ message: err.message });
+        handlers.files(req, res, fields, files);
+    });
 });
 
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-
-app.use((req, res) => {
-    res.status(404).sendFile(__dirname + '/static/404.html');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((req, res, next) => {
+    res.status(404).json({ code: 'Not found' });
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err, req, res, next) => {
-    console.error(err.message);
-    res.type(500);
-    res.render('404');
+    res.status(500).send('ads');
 });
 
-app.listen(port, () => {
-    console.log('Server start at port ' + port);
-});
+const startServer = (port) => {
+    app.listen(port);
+};
+
+if (require.main === module) {
+    startServer(process.env.PORT || 3000);
+} else {
+    module.exports = startServer;
+}
