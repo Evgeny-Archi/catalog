@@ -1,8 +1,9 @@
-const getTitle = require('./titles');
 const fileLoader = require('./loader');
+const { getModels } = require('../db');
 
-exports.home = (req, res) => {
-    res.json({ code: getTitle() });
+exports.home = async (req, res) => {
+    const dbResp = await getModels();
+    res.json(dbResp);
 };
 
 exports.process = (req, res) => {

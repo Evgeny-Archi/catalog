@@ -22,6 +22,6 @@
                "ESNext"
           ]
      },
-     "include": ["frontend/**/*", "server/**/*"],
+     "include": ["frontend/**/*"],
      "exclude": ["node_modules", "frontend/build"]
 }

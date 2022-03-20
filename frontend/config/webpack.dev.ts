@@ -4,6 +4,8 @@ import 'webpack-dev-server';
 import path from 'path';
 import common from './webpack.common';
 
+const { proxy } = require('../../package');
+
 const config: Configuration = merge(common, {
     mode: 'development',
     devtool: 'cheap-module-source-map',
@@ -15,7 +17,7 @@ const config: Configuration = merge(common, {
         open: true,
         compress: true,
         proxy: {
-            '/api': 'http://localhost:3000',
+            '/api': proxy,
         },
     },
 });

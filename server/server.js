@@ -3,11 +3,14 @@ const bodyParser = require('body-parser');
 const multiparty = require('multiparty');
 const handlers = require('./lib/handlers');
 const logger = require('./middleware/logger');
+// const addRoutes = require('./routes');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(logger(app.get('env')));
+
+// addRoutes(app);
 
 app.get('/api', handlers.home);
 app.post('/api/process', handlers.process);
