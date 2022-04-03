@@ -3,8 +3,7 @@ import { Configuration } from 'webpack';
 import 'webpack-dev-server';
 import path from 'path';
 import common from './webpack.common';
-
-const { proxy } = require('../../package');
+import { proxy } from '../../package.json';
 
 const config: Configuration = merge(common, {
     mode: 'development',
@@ -13,11 +12,18 @@ const config: Configuration = merge(common, {
         static: {
             directory: path.join(__dirname, '../', 'build'),
         },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
         hot: true,
         open: true,
         compress: true,
         proxy: {
-            '/api': proxy,
+            '/api': {
+                target: proxy,
+                secure: false,
+                changeOrigin: true,
+            },
         },
     },
 });

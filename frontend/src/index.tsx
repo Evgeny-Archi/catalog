@@ -27,14 +27,20 @@ const App: FC = () => {
 
     useEffect(() => {
         fetch('/api')
-            .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Server response with status ${res.status} and message ${res.statusText}`);
+                }
+                return res.json();
+            })
+            .then((data) => console.log(data))
+            .catch((err) => console.error(err));
     }, []);
 
     return (
         <>
             <div>Hello world</div>
-            <Counter />
+            <Counter name="asd" />
             <form onSubmit={submitHandler} encType="multipart/form-data">
                 <input type="text" name="name" value={nameValue} onChange={inputNameHandler} />
                 <input type="number" name="phone" value={phoneValue} onChange={inputPhoneHandler} />

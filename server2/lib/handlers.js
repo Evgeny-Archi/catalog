@@ -12,6 +12,10 @@ exports.process = (req, res) => {
 };
 
 exports.files = (req, res, fields, files) => {
-    fileLoader(files);
+    try {
+        fileLoader(files);
+    } catch (e) {
+        console.log('error', e);
+    }
     res.status(200).json({ message: 'ok' });
 };

@@ -7,10 +7,11 @@
     ],
     "verbose": true,
     "execMap": {
-      "js": "node --harmony"
+      "js": "node --harmony",
+      "ts": "ts-node"
     },
     "events": {
-      "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+      "restart": "clear"
     },
     "watch": [
         "server"
@@ -18,5 +19,5 @@
     "env": {
       "NODE_ENV": "development"
     },
-    "ext": "js,json"
+    "ext": "ts,js,json"
   }

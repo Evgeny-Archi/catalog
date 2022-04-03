@@ -9,6 +9,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(logger(app.get('env')));
+app.use(express.static(__dirname + '/static'));
 
 // addRoutes(app);
 
