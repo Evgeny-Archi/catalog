@@ -1,32 +1,43 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import fs from 'fs';
-const { Pool } = require('pg');
-import { postgress } from '../server2/credentials.json';
+import path from 'path';
+import { getModels } from './db';
 
-const { connectionString } = postgress;
-const pool = new Pool({ connectionString });
-
-type Data = Record<PropertyKey, string>[];
-
-const getModels = async (): Promise<Data> => {
-    const { rows } = await pool.query('SELECT * FROM MODELS');
-    return rows;
-};
+const staticPath = path.resolve(__dirname, '../frontend/build');
 
 export const get = async (req: IncomingMessage, res: ServerResponse) => {
-    const { url } = req;
+    const { url, headers } = req;
+    console.log(url);
+    if (url) {
+        const query = new URL(url, `http://${headers.host}`);
+        console.log(query);
+    }
     if (url === '/') {
-        const staticFile = `frontend/build/index.html`;
-        try {
-            res.setHeader('Content-Type', 'text/html');
-            const file = fs.createReadStream(staticFile);
-            file.on('open', () => {
-                res.statusCode = 200;
-                file.pipe(res);
+        console.log(req.url);
+        const staticFile = `${staticPath}/index.html`;
+        res.setHeader('Content-Type', 'text/html');
+        const file = fs.createReadStream(staticFile);
+        file.on('open', () => {
+            res.statusCode = 200;
+            file.pipe(res);
+        });
+        file.on('error', (err) => {
+            const stream = fs.createReadStream(__dirname + '/500.html');
+            stream.on('open', () => {
+                res.setHeader('Content-Type', 'text/html');
+                res.statusCode = 500;
+                stream.pipe(res);
+                console.error(err.message);
             });
-        } catch (e) {
-            console.log(e);
-        }
+            stream.on('error', (err) => {
+                res.setHeader('Content-Type', 'text/plain');
+                res.statusCode = 503;
+                res.end('Internal server error');
+                console.log('asdasdasd', err.message);
+            });
+        });
+    } else if (url === '/models') {
+        console.log(req.url);
     } else if (url === '/api') {
         res.on('error', (err) => console.error(err));
         const data = await getModels();
