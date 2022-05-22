@@ -11,7 +11,7 @@
       "ts": "ts-node"
     },
     "events": {
-      "restart": "clear"
+      "restart": "cls || clear"
     },
     "watch": [
         "server"
