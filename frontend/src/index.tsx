@@ -2,7 +2,11 @@ import React, { FC } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 const App: FC = () => {
-    return <div>Home</div>;
+    return (
+        <div>
+            <h1>Title</h1>Home
+        </div>
+    );
 };
 
 const rootContainer = document.getElementById('root');
