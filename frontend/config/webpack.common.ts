@@ -5,18 +5,17 @@ import { Configuration } from 'webpack';
 
 const config: Configuration = {
     entry: {
-        app: './frontend/src/index.tsx',
+        app: './frontend/index.tsx',
     },
     output: {
         filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, '../', 'build'),
+        path: path.resolve(__dirname, '../build'),
         publicPath: '/',
         clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Catalog',
-            template: path.join(__dirname, '../src', 'index.html'),
+            template: path.resolve(__dirname, '../index.html'),
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',

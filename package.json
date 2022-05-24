@@ -8,7 +8,6 @@
   "dependencies": {
     "@types/pg": "^8.6.5",
     "dotenv": "^16.0.0",
-    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "pg": "^8.7.3",
     "react": "^18.1.0",
@@ -68,16 +67,15 @@
   },
   "scripts": {
     "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
-    "build": "webpack --config ./config/webpack.client.ts",
+    "build": "webpack --config ./frontend/config/webpack.prod.ts",
     "start": "webpack serve --config ./frontend/config/webpack.dev.ts",
     "stylelint:all": "yarn stylelint",
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
     "prettify": "prettier --config .prettierrc --write",
     "test": "jest",
-    "build:server": "webpack --config ./config/webpack.server.ts",
-    "server:dev": "nodemon ./src/app.ts",
-    "server:prod": "NODE_ENV=production ts-node ./src/app.ts",
+    "server:dev": "nodemon ./src/server.ts",
+    "server:prod": "NODE_ENV=production ts-node ./src/server.ts",
     "pre-commit": "lint-staged"
   },
   "pre-commit": "pre-commit",

@@ -11,7 +11,7 @@ const config: Configuration = merge(common, {
     devServer: {
         historyApiFallback: true,
         static: {
-            directory: path.join(__dirname, '../', 'build'),
+            directory: path.resolve(__dirname, '../build'),
         },
         hot: true,
         open: true,
