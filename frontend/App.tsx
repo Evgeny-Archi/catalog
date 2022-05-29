@@ -1,29 +1,15 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Routing from './Routing';
 
 const App: FC = () => {
-    const [firms, setFirms] = useState<string[] | null>(null);
-
-    useEffect(() => {
-        fetch('/api/firms')
-            .then((res) => res.json())
-            .then((data) => setFirms(data));
-    }, []);
-
     return (
-        <div>
-            <h1>Firms</h1>
-            {firms !== null ? (
-                <div>
-                    {firms.map((firm) => (
-                        <span style={{ color: 'red' }} key={firm}>
-                            {firm} &nbsp;
-                        </span>
-                    ))}
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
+        <>
+            <Header />
+            <Routing />
+            <Footer />
+        </>
     );
 };
 

@@ -10,16 +10,14 @@ app.get('/api/firms', getFirms);
 
 app.use((req: Request, res: Response) => {
     res.contentType('text/plain');
-    res.status(404);
-    res.send('404 - not found');
+    res.status(404).send('404 - not found');
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.log(err);
     res.contentType('text/plain');
-    res.status(500);
-    res.send('Error 500');
+    res.status(500).send('Error 500');
 });
 
 app.listen(port, hostname, () => console.log(`Server listening http://${hostname}:${port}`));
