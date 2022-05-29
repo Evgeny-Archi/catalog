@@ -1,13 +1,21 @@
 /* eslint-disable react/display-name */
-import React, { ComponentType } from 'react';
+import React, { useState, useEffect, FC } from 'react';
+import { useParams } from 'react-router-dom';
 
-type Props = {
-    data?: string[];
-};
+const wrapAsPage = (Component: FC): FC => {
+    return () => {
+        const params = useParams();
+        const [data, setData] = useState(null);
 
-const wrapAsPage = (Component: ComponentType<Props>): ComponentType<Props> => {
-    return (props: Props) => {
-        return <Component {...props} />;
+        console.log(params);
+
+        useEffect(() => {
+            fetch('api/firms')
+                .then((res) => res.json())
+                .then((data) => setData(data));
+        }, []);
+
+        return data !== null ? <Component {...data} /> : <div>Loading...</div>;
     };
 };
 

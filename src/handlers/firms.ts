@@ -1,6 +1,22 @@
 import { Request, Response } from 'express';
 
-const firms = ['Toyota', 'Honda', 'Nissan'];
+const firms = [
+    {
+        name: 'Toyota',
+        id: 1,
+        url: 'toyota',
+    },
+    {
+        name: 'Honda',
+        id: 2,
+        url: 'honda',
+    },
+    {
+        name: 'Nissan',
+        id: 3,
+        url: 'nissan',
+    },
+];
 
 const getFirms = (req: Request, res: Response) => {
     res.type('application/json');
