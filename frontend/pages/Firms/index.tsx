@@ -7,12 +7,11 @@ const Firms: FC<PageData> = ({ firms }) => {
     return (
         <div>
             <h3>Firms</h3>
-            {firms &&
-                firms.map((firm) => (
-                    <Link to={firm.url} key={firm.id}>
-                        {firm.name}
-                    </Link>
-                ))}
+            {firms.map((firm) => (
+                <Link to={firm.url} key={firm.id}>
+                    {firm.name}
+                </Link>
+            ))}
         </div>
     );
 };

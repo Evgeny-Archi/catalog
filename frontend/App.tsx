@@ -11,7 +11,7 @@ const App: FC = () => {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={React.createElement(Firms)} />
-                    <Route path=":firm" element={<Models />} />
+                    <Route path=":firm" element={React.createElement(Models)} />
                     <Route path=":firm/:model" element={<Marks />} />
                 </Route>
                 <Route path="*" element={<p>Custom not found - 404</p>} />
