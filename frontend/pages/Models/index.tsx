@@ -1,5 +1,4 @@
-import React, { FC, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { FC } from 'react';
 import wrapAsPage from '../../hoc/wrap-as-page';
 
 const models = {
@@ -57,21 +56,9 @@ const models = {
 };
 
 const Models: FC<{ children?: React.ReactNode }> = () => {
-    const params = useParams();
-
-    const modelsList = models[params.firm];
-
-    console.log(modelsList);
     return (
         <div>
             <h3>Models page</h3>
-            {modelsList.map((model) => {
-                return (
-                    <Link to={model.url} key={model.id}>
-                        {model.name}
-                    </Link>
-                );
-            })}
         </div>
     );
 };

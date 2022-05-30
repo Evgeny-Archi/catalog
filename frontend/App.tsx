@@ -10,7 +10,7 @@ const App: FC = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<Firms />} />
+                    <Route index element={React.createElement(Firms)} />
                     <Route path=":firm" element={<Models />} />
                     <Route path=":firm/:model" element={<Marks />} />
                 </Route>
