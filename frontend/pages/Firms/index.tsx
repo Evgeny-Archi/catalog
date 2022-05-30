@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import wrapAsPage from '../../hoc/wrap-as-page';
 
-const Firms: FC = (props) => {
-    console.log(props);
+const Firms: FC = () => {
     return (
         <div>
             <h3>Firms</h3>
