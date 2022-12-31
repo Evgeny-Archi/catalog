@@ -20,7 +20,7 @@ const wrapAsPage = <T extends Record<string, unknown>>(Component: FC<T>): FC<T> 
                 .then((data) => setData(data))
                 .catch((err) => {
                     console.log(err);
-                    navigate('*');
+                    navigate('404');
                 });
         }, [navigate, params]);
 
